@@ -15,4 +15,11 @@ class AmountService(private val amountRepository: AmountRepository) {
         return amountRepository.findById(id).orElseThrow { throw AmountNotFoundException("Amount not found") }
     }
 
+    fun getAllAmount(): List<AmountEntity> {
+        return amountRepository.findAll()
+    }
+
+    fun getAmountEntity(amountId: Long): AmountEntity? {
+        return amountRepository.getReferenceById(amountId)
+    }
 }
