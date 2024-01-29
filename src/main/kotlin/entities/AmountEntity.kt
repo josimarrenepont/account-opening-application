@@ -11,5 +11,6 @@ data class AmountEntity(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
-    var account: Account? = null
+    var account: Account? = null,
+    val amount: Double
 )

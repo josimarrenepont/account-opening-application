@@ -13,7 +13,7 @@ class AmountEntityService(
 ) {
 
     fun save(amount: BigDecimal): AmountEntity {
-        val amountEntity = AmountEntity(value = amount)
+        val amountEntity = AmountEntity(value = amount, amount = 100.0)
         return amountEntityRepository.save(amountEntity)
     }
 
