@@ -1,25 +1,31 @@
-// AmountService.kt
+package service
+import AmountEntity
+import AmountNotFoundException
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import repositories.AmountRepository
+import repository.AmountEntityRepository
 import java.math.BigDecimal
 
 @Service
-class AmountService(private val amountRepository: AmountRepository) {
+class AmountEntityService(
+    @Autowired
+    private val amountEntityRepository: AmountEntityRepository
+) {
 
     fun save(amount: BigDecimal): AmountEntity {
         val amountEntity = AmountEntity(value = amount)
-        return amountRepository.save(amountEntity)
+        return amountEntityRepository.save(amountEntity)
     }
 
     fun findById(id: Long): AmountEntity {
-        return amountRepository.findById(id).orElseThrow { throw AmountNotFoundException("Amount not found") }
+        return amountEntityRepository.findById(id).orElseThrow { throw AmountNotFoundException("Amount not found") }
     }
 
     fun getAllAmount(): List<AmountEntity> {
-        return amountRepository.findAll()
+        return amountEntityRepository.findAll()
     }
 
     fun getAmountEntity(amountId: Long): AmountEntity? {
-        return amountRepository.getReferenceById(amountId)
+        return amountEntityRepository.getReferenceById(amountId)
     }
 }

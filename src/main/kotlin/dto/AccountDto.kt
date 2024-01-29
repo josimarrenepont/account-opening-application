@@ -1,4 +1,4 @@
-package entities.dto
+package dto
 
 import entities.Account
 import org.jetbrains.annotations.NotNull

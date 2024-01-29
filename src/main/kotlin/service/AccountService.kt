@@ -1,34 +1,35 @@
-package services
+package service
 
 import entities.Account
 import exceptions.InsufficientBalanceException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import repositories.AccountRepository
+import repository.AccountRepository
 import java.math.BigDecimal
 import javax.security.auth.login.AccountNotFoundException
 
 @Service
-data class AccountService(
+class AccountService(
     @Autowired
-    private val accountRepository: AccountRepository) {
+    private val accountRepository: AccountRepository
+) {
 
-    fun save(toEntity: Account): Account {
+   @Override fun save(toEntity: Account): Account {
         println("Saving account: $toEntity")
         val savedAccount = accountRepository.save(toEntity)
         println("Saved account: $savedAccount")
         return savedAccount;
     }
-    fun closeAccount(accountId: Long){
+    @Override fun closeAccount(accountId: Long){
         accountRepository.deleteById(accountId)
     }
-    fun deposit(accountId: Long, amount: BigDecimal): Account {
+    @Override fun deposit(accountId: Long, amount: BigDecimal): Account {
         val account = getAccountById(accountId)
         account.balance += amount
         return accountRepository.save(account)
     }
 
-    fun withdraw(accountId: Long, amount: BigDecimal): Account {
+    @Override fun withdraw(accountId: Long, amount: BigDecimal): Account {
         val account = getAccountById(accountId)
         if(account.balance < amount) {
             throw InsufficientBalanceException("Insufficient balance")
@@ -37,15 +38,15 @@ data class AccountService(
         return accountRepository.save(account)
     }
 
-    fun getAccountById(accountId: Long): Account{
+    @Override fun getAccountById(accountId: Long): Account{
         return accountRepository.findById(accountId).orElseThrow{ AccountNotFoundException("Account not Found") }
     }
-    fun updateAccount(id: Long, holderName: String): Account {
+    @Override fun updateAccount(id: Long, holderName: String): Account {
         val account = getAccountById(id)
         account.holderName = holderName
         return accountRepository.save(account)
     }
-    fun getAllAccounts(): List<Account> {
+    @Override fun getAllAccounts(): List<Account> {
         return accountRepository.findAll()
     }
 }
