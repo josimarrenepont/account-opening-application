@@ -1,6 +1,6 @@
-package controller
+package com.account.opening.application.account_application.controller
 
-import AmountEntity
+import com.account.opening.application.account_application.entities.AmountEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 
-import service.AmountEntityService
+import com.account.opening.application.account_application.service.AmountEntityService
+import org.springframework.web.bind.annotation.PostMapping
 
 @RestController
 @RequestMapping("/amounts")
@@ -19,13 +20,14 @@ class AmountEntityController(
     private val amountEntityService: AmountEntityService
 ) {
     @GetMapping
-    fun findAllAmount(): ResponseEntity<List<AmountEntity>> {
-        val amountEntity : List<AmountEntity> = amountEntityService.getAllAmount()
+    fun findAll(): ResponseEntity<List<AmountEntity>> {
+        val amountEntity : List<AmountEntity> = amountEntityService.findAll()
         return ResponseEntity.status(HttpStatus.OK).body(amountEntity)
     }
     @GetMapping("/{id}")
-    fun findByIdAmount(@PathVariable ("id") amountId: Long): ResponseEntity<AmountEntity> {
-        val amountEntity = amountEntityService.getAmountEntity(amountId)
+    fun findById(@PathVariable ("id") id: Long): ResponseEntity<AmountEntity> {
+        val amountEntity = amountEntityService.findById(id)
         return ResponseEntity.status(HttpStatus.OK).body(amountEntity)
     }
+
 }

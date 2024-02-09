@@ -1,4 +1,5 @@
-import controller.AmountEntityController
+import com.account.opening.application.account_application.controller.AmountEntityController
+import com.account.opening.application.account_application.entities.AmountEntity
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.mockito.Mockito.`when`
-import service.AmountEntityService
+import com.account.opening.application.account_application.service.AmountEntityService
 
 @ExtendWith(MockitoExtension::class)
 class AmountEntityControllerTest {
@@ -24,10 +25,10 @@ class AmountEntityControllerTest {
     fun testFindAllAmount() {
         // Mocking the service response
         val mockedAmountEntities = listOf(AmountEntity(id = 1, amount = 100.0), AmountEntity(id = 2, amount = 200.0))
-        `when`(amountEntityService.getAllAmount()).thenReturn(mockedAmountEntities)
+        `when`(amountEntityService.findAll()).thenReturn(mockedAmountEntities)
 
         // Calling the controller method
-        val responseEntity: ResponseEntity<List<AmountEntity>> = amountEntityController.findAllAmount()
+        val responseEntity: ResponseEntity<List<AmountEntity>> = amountEntityController.findAll()
 
         // Assertions
         assertNotNull(responseEntity)
@@ -42,7 +43,7 @@ class AmountEntityControllerTest {
         `when`(amountEntityService.getAmountEntity(1)).thenReturn(mockedAmountEntity)
 
         // Calling the controller method
-        val responseEntity: ResponseEntity<AmountEntity> = amountEntityController.findByIdAmount(1)
+        val responseEntity: ResponseEntity<AmountEntity> = amountEntityController.findById(1)
 
         // Assertions
         assertNotNull(responseEntity)

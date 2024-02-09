@@ -1,5 +1,7 @@
-import entities.Account
-import exceptions.InsufficientBalanceException
+package service
+
+import com.account.opening.application.account_application.entities.Account
+import com.account.opening.application.account_application.exceptions.InsufficientBalanceException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
@@ -8,8 +10,8 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import repository.AccountRepository
-import service.AccountService
+import com.account.opening.application.account_application.repository.AccountRepository
+import com.account.opening.application.account_application.service.AccountService
 import java.math.BigDecimal
 
 class AccountServiceTest {

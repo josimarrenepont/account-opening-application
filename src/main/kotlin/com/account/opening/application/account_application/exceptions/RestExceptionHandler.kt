@@ -1,4 +1,4 @@
-package exceptions
+package com.account.opening.application.account_application.exceptions
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

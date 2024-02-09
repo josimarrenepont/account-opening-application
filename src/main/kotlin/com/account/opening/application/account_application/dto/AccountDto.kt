@@ -1,6 +1,6 @@
-package dto
+package com.account.opening.application.account_application.dto
 
-import entities.Account
+import com.account.opening.application.account_application.entities.Account
 import org.jetbrains.annotations.NotNull
 import java.math.BigDecimal
 

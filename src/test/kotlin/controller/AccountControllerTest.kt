@@ -1,8 +1,7 @@
-import com.fasterxml.jackson.databind.ObjectMapper
-import controller.AccountController
-import dto.AccountDto
-import entities.Account
-import exceptions.InsufficientBalanceException
+package controller
+
+import com.account.opening.application.account_application.dto.AccountDto
+import com.account.opening.application.account_application.entities.Account
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -12,7 +11,8 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import service.AccountService
+import com.account.opening.application.account_application.service.AccountService
+import com.account.opening.application.account_application.controller.AccountController
 
 import java.math.BigDecimal
 
@@ -33,10 +33,10 @@ class AccountControllerTest {
     fun testFindAllAccounts() {
         // Mocking data
         val accounts = listOf(Account(id = 1, holderName = "Jose", balance = BigDecimal(100)))
-        `when`(accountService.getAllAccounts()).thenReturn(accounts)
+        `when`(accountService.findAll()).thenReturn(accounts)
 
         // Calling the method
-        val result: ResponseEntity<List<Account>> = accountController.findAllAccounts()
+        val result: ResponseEntity<List<Account>> = accountController.findAll()
 
         // Assertions
         assertEquals(HttpStatus.OK, result.statusCode)
@@ -48,10 +48,10 @@ class AccountControllerTest {
         // Mocking data
         val accountId = 1L
         val account = Account(id = accountId, holderName = "Jose", balance = BigDecimal(100))
-        `when`(accountService.getAccountById(accountId)).thenReturn(account)
+        `when`(accountService.findById(accountId)).thenReturn(account)
 
         // Calling the method
-        val result: ResponseEntity<Account> = accountController.findAccountById(accountId)
+        val result: ResponseEntity<Account> = accountController.findById(accountId)
 
         // Assertions
         assertEquals(HttpStatus.OK, result.statusCode)
@@ -79,6 +79,6 @@ class AccountControllerTest {
     }
 
     private fun AccountDto(holderName: String): AccountDto {
-     return dto.AccountDto(holderName, BigDecimal.ZERO)
+     return AccountDto(holderName, BigDecimal.ZERO)
     }
 }

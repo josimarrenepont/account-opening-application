@@ -1,9 +1,9 @@
-package exceptions
+package com.account.opening.application.account_application.exceptions
 
 import java.time.LocalDateTime
 
 open class CustomBankException(message: String) : RuntimeException(message){
-    val exceptionDetails = ExceptionDetails(
+    val exceptionDetails: ExceptionDetails = ExceptionDetails(
         "Bank Exception",
         LocalDateTime.now(),
         500,

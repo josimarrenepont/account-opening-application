@@ -1,9 +1,9 @@
-package service
-import AmountEntity
-import AmountNotFoundException
+package com.account.opening.application.account_application.service
+import com.account.opening.application.account_application.entities.AmountEntity
+import com.account.opening.application.account_application.repository.AmountEntityRepository
+import com.account.opening.application.account_application.exceptions.AmountNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import repository.AmountEntityRepository
 import java.math.BigDecimal
 
 @Service
@@ -21,11 +21,11 @@ class AmountEntityService(
         return amountEntityRepository.findById(id).orElseThrow { throw AmountNotFoundException("Amount not found") }
     }
 
-    fun getAllAmount(): List<AmountEntity> {
+    fun findAll(): List<AmountEntity> {
         return amountEntityRepository.findAll()
     }
 
-    fun getAmountEntity(amountId: Long): AmountEntity? {
-        return amountEntityRepository.getReferenceById(amountId)
+    fun getAmountEntity(id: Long): AmountEntity? {
+        return amountEntityRepository.getReferenceById(id)
     }
 }

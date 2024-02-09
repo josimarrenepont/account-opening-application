@@ -1,5 +1,5 @@
-import dto.AccountDto
-import entities.Account
+import com.account.opening.application.account_application.dto.AccountDto
+import com.account.opening.application.account_application.entities.Account
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
@@ -20,6 +20,6 @@ class AccountDtoTest {
     }
 
     private fun AccountDto(holderName: String): AccountDto {
-        return dto.AccountDto(holderName, BigDecimal.ZERO)
+        return AccountDto(holderName, BigDecimal.ZERO)
     }
 }
